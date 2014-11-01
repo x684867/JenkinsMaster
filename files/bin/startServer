@@ -1,0 +1,23 @@
+#!/bin/bash
+# 
+# startServer
+# (c) 2014 Sam Caldwell.  Public Domain.
+#
+# This script starts the Jenkins server
+# and its NGINX proxy front-end.
+#
+prettySleep(){
+    for i in $(seq 1 1 60);do echo -n ".";sleep 1;done;echo "done."
+}
+
+/etc/init.d/nginx stop && \
+/etc/init.d/jenkins restart && \
+echo -n "starting Jenkins..." && \
+prettySleep && \
+/etc/init.d/nginx start && \
+/bin/bash && \
+echo "All services started." && \
+exit 0 
+
+echo "One or more services failed." 
+exit 1

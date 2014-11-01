@@ -1,0 +1,22 @@
+#!/bin/bash -e
+#
+# installJavaRe
+# (c) 2014 Sam Caldwell.  Public Domain.
+# 
+# This script installs JavaRE
+
+mkdir -p /usr/local/java
+mkdir -p /root/java/jre
+cd /root/java
+wget -O jre.tar.gz \
+     http://javadl.sun.com/webapps/download/AutoDL?BundleId=97360
+
+tar -xvzf jre.tar.gz -C jre/
+JAVA_DIR=$(ls jre/ | tail -n1)
+mv jre/${JAVA_DIR} /usr/local/java/
+ln -sf /usr/local/java/${JAVA_DIR} /usr/local/java/current
+ln -sf /usr/local/java/current/bin/java /usr/bin/java
+JAVA_HOME=/usr/local/java/current/
+
+cd /root/
+rm -rf /root/java

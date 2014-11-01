@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# nginxEnableSite
+# (c) 2014 Sam Caldwell.  Public Domain.
+#
+# This script enables an NGINX vhost.
+#
+echo "Enabling vhost for :{$1}"
+ln -sf /etc/nginx/sites-available/$1 /etc/nginx/sites-enabled/$1 || exit 1
+echo "vhost [$1] enabled"
+exit 0

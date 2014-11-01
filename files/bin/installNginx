@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# installNginxProxy
+# (c) 2014 Sam Caldwell.  Public Domain
+#
+apt-get update -y --fix-missing && \
+apt-get install nginx -y && \
+echo "nginx installed." && \
+exit 0
+
+echo "nginx failed to install."
+exit 1

@@ -1,0 +1,38 @@
+#!/bin/bash -e
+#
+# installJenkinsDependencies
+# (c) 2014 Sam Caldwell.  Public Domain.
+#
+# Install packages needed by Jenkins
+#
+
+apt-get update --fix-missing -y
+apt-get upgrade -y
+
+#Install core tools.
+apt-get install zip unzip curl wget -y
+apt-get install build-essential -y
+
+apt-get install jenkins python-pymongo python-requests mysql-client python-mysql.connector unzip zip python-lxml ant expect libxml2-dev libxslt1-dev python-dev -qq -y
+
+#install python tools
+apt-get install python python-dev -y
+wget http://launchpadlibrarian.net/150183302/python-pip_1.4.1-2_all.deb
+dpkg -i python-pip_1.4.1-2_all.deb
+rm python-pip_1.4.1-2_all.deb
+apt-get install libpq-dev -y
+
+
+#install ruby tools
+apt-get install ruby rvm -y
+
+
+
+#Install Amazon AWS CLI
+cd /root/
+wget https://s3.amazonaws.com/aws-cli/awscli-bundle.zip
+unzip awscli-bundle.zip
+./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+rm -rf awscli-bundle*
+
+

@@ -1,0 +1,22 @@
+#!/bin/bash -e
+#
+# installJenkins
+# (c) 2014 Sam Caldwell.  Public Domain.
+# 
+# This script installs Jenkins to a master server
+# with an NGINX proxy front end server to handle
+# tcp/80, tcp/443 handoff to Jenkins.
+#
+# It also must configure the UFW firewall.
+#
+
+
+wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | \
+    sudo apt-key add -
+echo "deb http://pkg.jenkins-ci.org/debian binary/" > /etc/apt/sources.list.d/jenkins.list
+
+apt-get update -y --fix-missing
+apt-get upgrade -y
+
+apt-get install jenkins -y --force-yes
+echo "jenkins installed -----------"
