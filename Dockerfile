@@ -36,7 +36,8 @@ RUN /usr/bin/nginxEnableSite jenkinsProxy
 ADD files/vhost/publicKeys /etc/nginx/sites-available/
 RUN /usr/bin/nginxEnableSite publicKeys
 
-EXPOSE 443
+EXPOSE 443:443
+EXPOSE 80:80
 
 #default command when docker image is run
 CMD ["/usr/bin/startServer"]
