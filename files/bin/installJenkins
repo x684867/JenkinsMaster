@@ -24,8 +24,10 @@ apt-get install jenkins -y --force-yes
 echo "jenkins installed -----------"
 
 echo "customizing jenkins...."
-echo "stopping jenkins..."
-/etc/init.d/jenkins stop
+#echo "stopping jenkins..."
+#/etc/init.d/jenkins stop
+
+
 
 echo "fixing jenkins home in /etc/default/jenkins"
 sed -i -e 's/JENKINS_HOME=\/var\/lib\/jenkins/JENKINS_HOME=\/home\/jenkins/g' /etc/default/jenkins

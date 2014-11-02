@@ -1,13 +1,19 @@
 server {
-        listen 80 default_server;
-        listen [::]:80 default_server ipv6only=on;
+        listen 80;
         root /usr/share/nginx/html;
         index index.html;
         server_name localhost;
-        location / {
+        location /publicKeys {
                 try_files $uri $uri/ =404;
         }
+        #
+        # Redirect all other content to the Jenkins
+        # proxy.
+        #
+        location / {
+                return 301 https://$http_host$request_uri$is_args$query_string;
+        }
+        error_page 403 /403.html;
         error_page 404 /404.html;
         error_page 500 /500.html;
-        error_page 403 /403.html;
 }

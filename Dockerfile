@@ -45,6 +45,11 @@ ADD files/sites/publicKeys /usr/share/nginx/html/
 ADD files/vhost/publicKeys /etc/nginx/sites-available/
 RUN /usr/bin/nginxEnableSite publicKeys
 
+#Install any custom configuration files.
+ADD files/conf.d/jenkins.model.JenkinsLocationConfiguration.xml /home/jenkins/
+ADD files/conf.d/config.xml /home/jenkins/config.xml
+
+
 RUN su -l jenkins -c 'cat /dev/zero | ssh-keygen -t rsa -b 2048 -q -N ""' &> /dev/null && cat /home/jenkins/.ssh/id_rsa.pub >> /usr/share/nginx/html/publicKeys
 
 

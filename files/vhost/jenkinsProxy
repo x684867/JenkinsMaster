@@ -8,6 +8,8 @@ server {
         ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
         ssl_prefer_server_ciphers on;
         location / {
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
                 proxy_pass http://127.0.0.1:8080;
         }
 }
