@@ -1,7 +1,7 @@
 JenkinsMaster
 =============
 
-This project creates a jenkins master server container.
+This project creates an easy, out-of-the-box jenkins master server container.
 
 Usage
 -----
@@ -13,8 +13,10 @@ Usage
 
     and this command will start Jenkins and expose it to the wider network where users can interact to configure and operate the server.
 
-(3) The container exposes SSH public keys as http://<ipaddr>:80/publicKeys
+(3) The container exposes SSH public keys as http://<ipaddr>/publicKeys
 
+(4) The container provides a self-signed certificate for Jenkins.  In most
+    cases people probably prefer to install a signed certificate or other PKI.
 
 Changes:
 --------
