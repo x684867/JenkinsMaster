@@ -11,7 +11,7 @@ prettySleep(){
 }
 
 /etc/init.d/nginx stop && \
-/etc/init.d/jenkins restart && \
+/etc/init.d/jenkins restart &> /dev/null && \
 echo -n "starting Jenkins..." && \
 prettySleep && \
 /etc/init.d/nginx start && \
