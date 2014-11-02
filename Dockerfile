@@ -45,6 +45,7 @@ ADD files/sites/publicKeys /usr/share/nginx/html/
 ADD files/vhost/publicKeys /etc/nginx/sites-available/
 RUN /usr/bin/nginxEnableSite publicKeys
 
+RUN su -l jenkins -c 'cat /dev/zero | ssh-keygen -t rsa -b 2048 -q -N ""' &> /dev/null && cat /home/jenkins/.ssh/id_rsa.pub >> /usr/share/nginx/html/publicKeys
 
 
 EXPOSE 443
