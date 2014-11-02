@@ -9,7 +9,7 @@ Usage
 
 (2) The container created by this project can be run as--
 
-    docker run -i -P -t x684867/jenkinsMaster
+    docker run -i -p 80:80 -p 443:443 -t x684867/jenkinsMaster
 
     and this command will start Jenkins and expose it to the wider network where users can interact to configure and operate the server.
 
