@@ -5,6 +5,7 @@
 #
 apt-get update -y --fix-missing && \
 apt-get install nginx -y && \
+rm /etc/nginx/sites-enabled/* && \
 echo "nginx installed." && \
 exit 0
 
