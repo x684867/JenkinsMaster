@@ -7,7 +7,6 @@ MAINTAINER Sam Caldwell <mail@samcaldwell.net>
 #Install all supporting scripts.
 ADD files/bin/createKeys /usr/bin/
 ADD files/bin/installJenkins /usr/bin/
-ADD files/bin/installJenkinsDependencies /usr/bin/
 ADD files/bin/installNginx /usr/bin/
 ADD files/bin/nginxEnableSite /usr/bin/
 ADD files/bin/startServer /usr/bin/
@@ -28,16 +27,28 @@ RUN /usr/bin/createKeys
 
 RUN /usr/bin/installNginx
 
+#Install Error Pages
+ADD files/sites/400.html /usr/share/nginx/html/
+ADD files/sites/401.html /usr/share/nginx/html/
+ADD files/sites/402.html /usr/share/nginx/html/
+ADD files/sites/403.html /usr/share/nginx/html/
+ADD files/sites/404.html /usr/share/nginx/html/
+ADD files/sites/500.html /usr/share/nginx/html/
+
+
 #Install jenkinsProxy vhost
 ADD files/vhost/jenkinsProxy /etc/nginx/sites-available/jenkinsProxy
 RUN /usr/bin/nginxEnableSite jenkinsProxy
 
 #Install publicKeys vhost
+ADD files/sites/publicKeys /usr/share/nginx/html/
 ADD files/vhost/publicKeys /etc/nginx/sites-available/
 RUN /usr/bin/nginxEnableSite publicKeys
 
-EXPOSE 443:443
-EXPOSE 80:80
+
+
+EXPOSE 443
+EXPOSE 80
 
 #default command when docker image is run
 CMD ["/usr/bin/startServer"]

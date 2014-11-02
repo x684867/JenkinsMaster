@@ -10,13 +10,35 @@
 # It also must configure the UFW firewall.
 #
 
-
+echo "Adding the Jenkins Repo to our sources list with GPG key..."
 wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | \
     sudo apt-key add -
 echo "deb http://pkg.jenkins-ci.org/debian binary/" > /etc/apt/sources.list.d/jenkins.list
 
+echo "Updating the apt repos..."
 apt-get update -y --fix-missing
 apt-get upgrade -y
 
+echo "installing jenkins..."
 apt-get install jenkins -y --force-yes
 echo "jenkins installed -----------"
+
+echo "customizing jenkins...."
+echo "stopping jenkins..."
+/etc/init.d/jenkins stop
+
+echo "fixing jenkins home in /etc/default/jenkins"
+sed -i -e 's/JENKINS_HOME=\/var\/lib\/jenkins/JENKINS_HOME=\/home\/jenkins/g' /etc/default/jenkins
+
+echo "Fixing jenkins user in /etc/passwd"
+sed -i -e 's/\/var\/lib\/jenkins/\/home\/jenkins/g' /etc/passwd
+
+echo "creating the new JENKINS_HOME as /home/jenkins/"
+mkdir /home/jenkins
+chown jenkins: /home/jenkins -R
+rm -rf /var/lib/jenkins
+#
+# Add further customization here.
+#
+/etc/init.d/jenkins start
+echo "jenkins is now customized."
