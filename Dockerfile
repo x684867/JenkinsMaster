@@ -21,9 +21,6 @@ RUN /usr/bin/installJavaRe
 RUN /usr/bin/installJenkins
 # ToDo: Configure Jenkins
 
-#Create the Jenkins SSH Keys
-RUN /usr/bin/createKeys
-
 RUN /usr/bin/installNginx
 
 #Install Error Pages
