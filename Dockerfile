@@ -5,7 +5,6 @@ FROM x684867/ubuntucore14.04
 MAINTAINER Sam Caldwell <mail@samcaldwell.net>
 
 #Install all supporting scripts.
-ADD files/bin/createKeys /usr/bin/
 ADD files/bin/installJenkins /usr/bin/
 ADD files/bin/installNginx /usr/bin/
 ADD files/bin/nginxEnableSite /usr/bin/
